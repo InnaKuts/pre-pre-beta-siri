@@ -1,5 +1,6 @@
 from model.addressBook import AddressBook
 from notes import Notebook
+from .add_note import add_note
 from .add_test_data import add_test_data
 from tools import command_check_decorator, parse_input
 from .list_notes import list_notes
@@ -28,6 +29,9 @@ def main_command(cmd: str, args: [str], notebook: Notebook, addressbook: Address
     elif list_notes(cmd, notebook):
         return True
     elif find_notes(cmd, args, notebook):
+        return True
+    elif add_note(cmd, args, notebook, addressbook):
+        print("Note added!")
         return True
     else:
         print("Unknown note command!")
