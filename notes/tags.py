@@ -23,7 +23,7 @@ class Tags(Field):
         return len(self.value.intersection(other)) > 0
 
     def has_all(self, other: list[str]):
-        return len(self.value.issuperset(other)) > 0
+        return self.value.issuperset(other)
 
     def __len__(self):
         return len(self.value)

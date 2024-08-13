@@ -1,8 +1,6 @@
 from notes import Notebook, Note
-from tools import command_check_decorator
 
 
-@command_check_decorator()
 def add_test_data(cmd: str, notebook: Notebook):
     if cmd != "test-data":
         return False
