@@ -1,14 +1,6 @@
-from load_save_data import load_data, save_data
 from model.addressBook import AddressBook
 from model.record import Record
-from command_check_decorator import command_check_decorator
-from parse_input_validator import parse_input_validator
-
-@parse_input_validator
-def parse_input(cmd_string):
-    cmd, *args = cmd_string.split()
-    cmd = cmd.strip().lower()
-    return (cmd, args)
+from tools import command_check_decorator, parse_input, load_data, save_data
 
 
 @command_check_decorator(
@@ -99,8 +91,8 @@ def show_upcoming_birthdays(book: AddressBook):
 
 
 def main():
-    book = AddressBook()
-    book = load_data()
+    book_path = "addressbook.pkl"
+    book = load_data(book_path, AddressBook())
 
     print("Welcome to the assistant bot!")
     while True:
@@ -140,5 +132,5 @@ def main():
 
         else:
             print("Invalid command.")
-    save_data(book) 
+    save_data(book, book_path)
 main()
