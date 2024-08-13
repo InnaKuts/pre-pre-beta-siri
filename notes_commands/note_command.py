@@ -13,7 +13,7 @@ def note_command(cmd: str, args: [str], notebook: Notebook, addressbook: Address
         return res
     else:
         print(res)
-        return False
+        return True
 
 
 @command_check_decorator()
