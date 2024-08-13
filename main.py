@@ -1,11 +1,13 @@
 from model.addressBook import AddressBook
 from model.record import Record
+from notes import Notebook
+from notes_commands import note_command
 from tools import command_check_decorator, parse_input, load_data, save_data
 
 
 @command_check_decorator(
-        value_error_message="Error: Not enough arguments. Usage: add [name] [phone number]"
-        ) 
+    value_error_message="Error: Not enough arguments. Usage: add [name] [phone number]"
+)
 def add_contact(args, book: AddressBook):
     name, phone, *_ = args
     record = book.find(name)
@@ -20,9 +22,9 @@ def add_contact(args, book: AddressBook):
 
 
 @command_check_decorator(
-        value_error_message="Error: Not enough arguments. Usage: change [name] [old phone] [new phone number]"
-        ) 
-def change_contact(args, book:AddressBook):
+    value_error_message="Error: Not enough arguments. Usage: change [name] [old phone] [new phone number]"
+)
+def change_contact(args, book: AddressBook):
     name, old_phone, new_phone = args
     if name in book:
         r = book[name]
@@ -33,27 +35,27 @@ def change_contact(args, book:AddressBook):
 
 
 @command_check_decorator(
-        index_error_message="Error: Not enough arguments. Usage: delete [name]",
-        key_error_message= "Error: Contact not found"
-        ) 
-def delete_contact(args, book:AddressBook):
+    index_error_message="Error: Not enough arguments. Usage: delete [name]",
+    key_error_message="Error: Contact not found"
+)
+def delete_contact(args, book: AddressBook):
     name = args[0]
     book.pop(name)
     return "Contact removed."
 
 
 @command_check_decorator(
-        index_error_message="Error: Not enough arguments. Usage: phone [name]",
-        key_error_message= "Error: Contact not found"
-        )
-def show_phone(args, book:AddressBook):
+    index_error_message="Error: Not enough arguments. Usage: phone [name]",
+    key_error_message="Error: Contact not found"
+)
+def show_phone(args, book: AddressBook):
     name = args[0]
     contact_strings = [p.value for p in book[name].phones]
     result = ", ".join(contact_strings)
     return result
 
 
-def show_all(book:AddressBook):
+def show_all(book: AddressBook):
     if len(book) == 0:
         return "No contacts found."
 
@@ -63,8 +65,8 @@ def show_all(book:AddressBook):
 
 
 @command_check_decorator(
-        value_error_message="Error: Not enough arguments. Usage: add-birthday [name] [birthday (DD.MM.YYYY)]"
-        ) 
+    value_error_message="Error: Not enough arguments. Usage: add-birthday [name] [birthday (DD.MM.YYYY)]"
+)
 def add_birthday(args, book: AddressBook):
     name, birthday, *_ = args
     record = book.find(name)
@@ -94,11 +96,14 @@ def main():
     book_path = "addressbook.pkl"
     book = load_data(book_path, AddressBook())
 
+    notebook_path = "notebook.pkl"
+    notebook = load_data(notebook_path, Notebook())
+
     print("Welcome to the assistant bot!")
     while True:
         cmd_string = input("Enter a command: ")
         cmd, args = parse_input(cmd_string)
-                
+
         if cmd in ["close", "exit"]:
             print("Good bye!")
             break
@@ -120,7 +125,7 @@ def main():
 
         elif cmd == "all":
             print(show_all(book))
-            
+
         elif cmd == "add-birthday":
             print(add_birthday(args, book))
 
@@ -130,7 +135,13 @@ def main():
         elif cmd == "birthdays":
             print(show_upcoming_birthdays(book))
 
+        elif note_command(cmd, args, notebook, book):
+            pass
+
         else:
             print("Invalid command.")
     save_data(book, book_path)
+    save_data(notebook, notebook_path)
+
+
 main()
