@@ -3,6 +3,7 @@ from notes import Notebook
 from .add_note import add_note
 from .add_test_data import add_test_data
 from tools import command_check_decorator, parse_input
+from .delete_note import delete_note
 from .list_notes import list_notes
 from .find_notes import find_notes
 
@@ -31,7 +32,8 @@ def main_command(cmd: str, args: [str], notebook: Notebook, addressbook: Address
     elif find_notes(cmd, args, notebook):
         return True
     elif add_note(cmd, args, notebook, addressbook):
-        print("Note added!")
+        return True
+    elif delete_note(cmd, args, notebook):
         return True
     else:
         print("Unknown note command!")

@@ -9,7 +9,7 @@ def add_note(cmd: str, args: [str], notebook: Notebook, addressbook: AddressBook
     description = input_description()
     tags = input_tags()
     contact = input_contact(addressbook)
-    return notebook.add_note(
+    res = notebook.add_note(
         Note(
             title=title,
             description=description,
@@ -17,6 +17,8 @@ def add_note(cmd: str, args: [str], notebook: Notebook, addressbook: AddressBook
             contact=contact
         )
     )
+    print("Note added!" if res else "Failed to add a note")
+    return True
 
 
 def get_title(args: [str]):

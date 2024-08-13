@@ -2,14 +2,13 @@ from notes import Notebook
 
 
 def find_notes(cmd: str, args: [str], notebook: Notebook):
-    if cmd not in ["find", "find-tags", "find-tags-strict"]:
+    if cmd not in ["find", "find-strict"]:
         return False
     if len(notebook) == 0:
         print("Notebook is empty!")
         return True
-    by_title = cmd == "find"
-    strict = cmd == "find-tags-strict"
-    notes = find_notes_internal(args, by_title, strict, notebook)
+    strict = cmd == "find-strict"
+    notes = find_notes_internal(args, strict, notebook)
     if len(notes) == 0:
         print("No matching notes found!")
     for note in notes:
@@ -17,13 +16,16 @@ def find_notes(cmd: str, args: [str], notebook: Notebook):
     return True
 
 
-def find_notes_internal(args: [str], by_title: bool, strict: bool, notebook: Notebook):
+def find_notes_internal(args: [str], strict: bool, notebook: Notebook):
     if len(args) == 0:
         args = input_words()
-    if len(args) == 0:
-        raise Exception("At least one word required to start the search.")
-    words = {v.strip().lower() for v in args}
-    notes = notebook.find_notes_by_title(words, strict) if by_title else notebook.find_notes_by_tags(words, strict)
+    if len(args) > 0:
+        words = {v.strip().lower() for v in args}
+        notes = notebook.find_notes_by_tags(words, strict)
+        if not strict:
+            notes += [n for n in notebook.find_notes_by_title(words) if n not in notes]
+    else:
+        notes = list(notebook.values())
     notes.sort(key=lambda n: n.uuid)
     return notes
 
