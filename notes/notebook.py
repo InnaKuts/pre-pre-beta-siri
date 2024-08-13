@@ -23,5 +23,5 @@ class Notebook(UserDict):
         return False
 
     def find_notes(self, tags: [str], match_all: bool = False):
-        return [d for d in self.data if d.tags.has(tags, match_all)]
+        return [d for d in self.data.values() if d.tags.has(tags, match_all)]
 
