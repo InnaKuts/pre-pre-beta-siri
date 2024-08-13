@@ -17,9 +17,10 @@ def update_note(cmd: str, args: [str], notebook: Notebook, addressbook: AddressB
     for (index, note) in enumerate(notes):
         print(f"[{index + 1}]: {note}")
     index = input_index()
-    if not index or index < 0 or index >= len(notes):
+    if not index or index < 1 or index > len(notes):
         print("Invalid note index")
         return True
+    index -= 1
     note = notes[index]
     title = get_title([], note.title.value)
     description = input_description(note.description.value)
@@ -41,6 +42,6 @@ def update_note(cmd: str, args: [str], notebook: Notebook, addressbook: AddressB
 def input_index():
     line = input("Enter number of note to update: ").strip()
     try:
-        return int(line) - 1
+        return int(line)
     except Exception:
         return None

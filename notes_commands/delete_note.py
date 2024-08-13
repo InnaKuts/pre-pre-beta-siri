@@ -15,10 +15,10 @@ def delete_note(cmd: str, args: [str], notebook: Notebook):
     for (index, note) in enumerate(notes):
         print(f"[{index + 1}]: {note}")
     index = input_index()
-    if not index or index < 0 or index >= len(notes):
+    if not index or index < 1 or index > len(notes):
         print("Invalid note index")
         return True
-
+    index -= 1
     res = notebook.delete_note(notes[index].uuid)
     print("Note deleted!" if res else "Failed to delete a note!")
     return True
@@ -27,6 +27,6 @@ def delete_note(cmd: str, args: [str], notebook: Notebook):
 def input_index():
     line = input("Enter number of note to delete: ").strip()
     try:
-        return int(line) - 1
+        return int(line)
     except Exception:
         return None
