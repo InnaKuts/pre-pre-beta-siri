@@ -26,7 +26,11 @@ def main_command(cmd: str, args: [str], notebook: Notebook, addressbook: Address
         cmd, *args = args
     else:
         cmd, args = parse_input(input("Enter notes command: "))
-    if add_test_data(cmd, notebook):
+    if cmd == "help":
+        print("Available commands:")
+        print(help_string())
+        return True
+    elif add_test_data(cmd, notebook):
         return True
     elif list_notes(cmd, notebook):
         return True
@@ -39,5 +43,18 @@ def main_command(cmd: str, args: [str], notebook: Notebook, addressbook: Address
     elif update_note(cmd, args, notebook, addressbook):
         return True
     else:
-        print("Unknown note command!")
-        return False
+        print("Unknown note command! Available commands are: ")
+        print(help_string())
+        return True
+
+
+def help_string():
+    return f"""
+    `note test-data` - populates the notebook with the new data
+    `note list` - list all notes in the notebook
+    `note find [words]` - find notes by words in title or tag
+    `note find-strict [tags]` - find notes by tags, each note should contain all tags
+    `note add [title]` - add new note
+    `note delete [words]` - find notes by words and prompt user to delete a note
+    `note update [words]` - find notes by words and prompt user to update a note
+""".strip("\n")
