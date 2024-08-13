@@ -1,8 +1,8 @@
 def command_check_decorator(
-        index_error_message = None,
-        value_error_message = None,
-        key_error_message = None,
-        ): 
+        index_error_message=None,
+        value_error_message=None,
+        key_error_message=None,
+):
     def decorator(func):
         def wrapper(*args, **kwargs):
             try:
@@ -15,5 +15,7 @@ def command_check_decorator(
                 return key_error_message if key_error_message != None else e
             except Exception as e:
                 return e
+
         return wrapper
+
     return decorator
