@@ -3,6 +3,7 @@ from model.addressBook import AddressBook
 from model.record import Record
 from command_check_decorator import command_check_decorator
 from parse_input_validator import parse_input_validator
+from model.search import search_by_name
 
 @parse_input_validator
 def parse_input(cmd_string):
@@ -137,6 +138,9 @@ def main():
 
         elif cmd == "birthdays":
             print(show_upcoming_birthdays(book))
+
+        elif cmd == "search":
+            print(search_by_name(args, book))
 
         else:
             print("Invalid command.")
