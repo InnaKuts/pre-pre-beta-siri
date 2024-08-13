@@ -6,8 +6,8 @@ from .title import Title
 
 
 class Note:
-    def __init__(self, title: str, description: str, contact: str = None, tags: [str] = None):
-        self.__uuid = str(time.time())
+    def __init__(self, title: str, description: str, contact: str = None, tags: [str] = None, uuid: str = None):
+        self.__uuid = uuid or str(time.time())
         self.contact = Contact(contact) if contact else None
         self.title = Title(title)
         self.description = Description(description)

@@ -3,8 +3,6 @@ from model.field import Field
 
 class Tags(Field):
     def __init__(self, value: [str]):
-        if type(value) is not list:
-            raise Exception("Tags should be a list")
         super().__init__(set(value))
 
     def add(self, tag: str):
