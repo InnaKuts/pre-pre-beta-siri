@@ -1,136 +1,57 @@
+from prompt_toolkit import PromptSession
 from model.addressBook import AddressBook
-from model.record import Record
-from tools import command_check_decorator, parse_input, load_data, save_data
+from tools import parse_input, load_data, save_data
+from tools.address_book_functions import add_birthday, add_contact, change_contact, delete_contact, show_all, show_birthday, show_phone, show_upcoming_birthdays, show_contacts_birthdays_within
+from tools.completer import CommandCompleter
 
+COMMANDS = {
+        "hello": lambda *args: "How can I help you?",
+        "close": lambda *args: False,
+        "exit": lambda *args: False,
 
-@command_check_decorator(
-        value_error_message="Error: Not enough arguments. Usage: add [name] [phone number]"
-        ) 
-def add_contact(args, book: AddressBook):
-    name, phone, *_ = args
-    record = book.find(name)
-    message = "Contact updated."
-    if record is None:
-        record = Record(name)
-        book.add_record(record)
-        message = "Contact added."
-    if phone:
-        record.add_phone(phone)
-    return message
-
-
-@command_check_decorator(
-        value_error_message="Error: Not enough arguments. Usage: change [name] [old phone] [new phone number]"
-        ) 
-def change_contact(args, book:AddressBook):
-    name, old_phone, new_phone = args
-    if name in book:
-        r = book[name]
-        r.edit_phone(old_phone, new_phone)
-        return "Contact updated."
-    else:
-        raise Exception("Error: Contact not found.")
-
-
-@command_check_decorator(
-        index_error_message="Error: Not enough arguments. Usage: delete [name]",
-        key_error_message= "Error: Contact not found"
-        ) 
-def delete_contact(args, book:AddressBook):
-    name = args[0]
-    book.pop(name)
-    return "Contact removed."
-
-
-@command_check_decorator(
-        index_error_message="Error: Not enough arguments. Usage: phone [name]",
-        key_error_message= "Error: Contact not found"
-        )
-def show_phone(args, book:AddressBook):
-    name = args[0]
-    contact_strings = [p.value for p in book[name].phones]
-    result = ", ".join(contact_strings)
-    return result
-
-
-def show_all(book:AddressBook):
-    if len(book) == 0:
-        return "No contacts found."
-
-    contact_strings = [str(record) for _, record in book.data.items()]
-    result = "\n".join(contact_strings)
-    return result
-
-
-@command_check_decorator(
-        value_error_message="Error: Not enough arguments. Usage: add-birthday [name] [birthday (DD.MM.YYYY)]"
-        ) 
-def add_birthday(args, book: AddressBook):
-    name, birthday, *_ = args
-    record = book.find(name)
-    if record is None:
-        raise Exception(f"No '{name}' contact found")
-    record.add_birthday(birthday)
-    return "Contact updated"
-
-
-@command_check_decorator()
-def show_birthday(args, book: AddressBook):
-    name = args[0]
-    record = book.find(name)
-    if record is None:
-        raise Exception(f"No '{name}' contact found")
-    return record.birthday.value.strftime("%d.%m.%Y")
-
-
-def show_upcoming_birthdays(book: AddressBook):
-    items = book.get_upcoming_birthdays()
-    birthday_strings = [f"{x['name']} - {x['congratulation_date']}" for x in items]
-    result = "\n".join(birthday_strings)
-    return result
-
+        "add-contact": add_contact,
+        "all" : show_all,
+        "change": change_contact,
+        "delete": delete_contact,
+        "phone": show_phone,
+        "add-birthday": add_birthday,
+        "show-birthday": show_birthday,
+        "birthdays": show_upcoming_birthdays,
+        "contacts-birthdays-within": show_contacts_birthdays_within
+}
 
 def main():
     book_path = "addressbook.pkl"
     book = load_data(book_path, AddressBook())
 
-    print("Welcome to the assistant bot!")
+    commands = COMMANDS.keys()
+    session = PromptSession(completer = CommandCompleter(commands))
+
+    print("Welcome to the Pre-Pre-Beta-Siri bot!")
+
     while True:
-        cmd_string = input("Enter a command: ")
-        cmd, args = parse_input(cmd_string)
-                
-        if cmd in ["close", "exit"]:
-            print("Good bye!")
+        try:
+            user_input = session.prompt('Enter command: ')
+            (command, params) = parse_input(user_input)
+
+            if command in commands:
+                functionToCall = COMMANDS[command]
+                result = functionToCall(params, book)
+
+                if(not isinstance(result, bool) or (result == True)):
+                    print(result)
+                else:
+                    print("Good bye!")
+                    break
+            else:
+                print("Unknown command. Please try again.")
+
+        except KeyboardInterrupt: #Ctrl+C
+            break  
+        except EOFError: #Ctrl+D
             break
 
-        elif cmd == "hello":
-            print("How can I help you?")
+    save_data(book, book_path) 
 
-        elif cmd == "add":
-            print(add_contact(args, book))
-
-        elif cmd == "change":
-            print(change_contact(args, book))
-
-        elif cmd == "delete":
-            print(delete_contact(args, book))
-
-        elif cmd == "phone":
-            print(show_phone(args, book))
-
-        elif cmd == "all":
-            print(show_all(book))
-            
-        elif cmd == "add-birthday":
-            print(add_birthday(args, book))
-
-        elif cmd == "show-birthday":
-            print(show_birthday(args, book))
-
-        elif cmd == "birthdays":
-            print(show_upcoming_birthdays(book))
-
-        else:
-            print("Invalid command.")
-    save_data(book, book_path)
-main()
+if __name__ == "__main__":
+    main()
