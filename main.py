@@ -1,5 +1,7 @@
 from prompt_toolkit import PromptSession
 from model.addressBook import AddressBook
+from notes.note import Note
+from notes.notebook import Notebook
 from tools import parse_input, load_data, save_data
 from tools.address_book_functions import add_birthday, add_contact, change_contact, delete_contact, show_all, show_birthday, show_phone, show_upcoming_birthdays, show_contacts_birthdays_within
 from tools.completer import CommandCompleter
@@ -22,8 +24,8 @@ COMMANDS = {
 
 def main():
     book_path = "addressbook.pkl"
-    book = load_data(book_path, AddressBook())
-
+    address_book, note_book = load_data(book_path, (AddressBook(), Notebook()))
+   
     commands = COMMANDS.keys()
     session = PromptSession(completer = CommandCompleter(commands))
 
@@ -36,7 +38,7 @@ def main():
 
             if command in commands:
                 functionToCall = COMMANDS[command]
-                result = functionToCall(params, book)
+                result = functionToCall(params, address_book)
 
                 if(not isinstance(result, bool) or (result == True)):
                     print(result)
@@ -51,7 +53,7 @@ def main():
         except EOFError: #Ctrl+D
             break
 
-    save_data(book, book_path) 
+    save_data(book_path, (address_book, note_book)) 
 
 if __name__ == "__main__":
     main()
