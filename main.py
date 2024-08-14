@@ -1,7 +1,7 @@
 from prompt_toolkit import PromptSession
 from model.addressBook import AddressBook
 from tools import parse_input, load_data, save_data
-from tools.address_book_functions import add_birthday, add_contact, change_contact, delete_contact, show_all, show_birthday, show_phone, show_upcoming_birthdays
+from tools.address_book_functions import add_birthday, add_contact, change_contact, delete_contact, show_all, show_birthday, show_phone, show_upcoming_birthdays, show_contacts_birthdays_within
 from tools.completer import CommandCompleter
 
 COMMANDS = {
@@ -17,6 +17,7 @@ COMMANDS = {
         "add-birthday": add_birthday,
         "show-birthday": show_birthday,
         "birthdays": show_upcoming_birthdays,
+        "contacts-birthdays-within": show_contacts_birthdays_within
 }
 
 def main():
