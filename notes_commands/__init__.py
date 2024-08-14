@@ -1,1 +1,1 @@
-from .note_command import note_command
+from .commands import COMMANDS as NOTE_COMMANDS

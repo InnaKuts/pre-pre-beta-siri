@@ -22,8 +22,8 @@ def find_notes_internal(args: [str], strict: bool, notebook: Notebook):
     if len(args) > 0:
         words = {v.strip().lower() for v in args}
         notes = notebook.find_notes_by_tags(words, strict)
-        if not strict:
-            notes += [n for n in notebook.find_notes_by_title(words) if n not in notes]
+        notes += notebook.find_notes_by_title(words, strict)
+        notes += notebook.find_notes_by_description(words, strict)
     else:
         notes = list(notebook.values())
     notes.sort(key=lambda n: n.uuid)
