@@ -89,6 +89,13 @@ def show_upcoming_birthdays(book: AddressBook):
     result = "\n".join(birthday_strings)
     return result
 
+@command_check_decorator(
+        index_error_message="Error: Not enough arguments. Usage: contacts-birthdays-within [birthdays-days-within]"
+        )
+def show_contacts_birthdays_within(args, book: AddressBook):
+    days_till = args[0]
+    result = book.get_birthdays_till_date(int(days_till))
+    return result
 
 def main():
     book_path = "addressbook.pkl"
@@ -98,7 +105,7 @@ def main():
     while True:
         cmd_string = input("Enter a command: ")
         cmd, args = parse_input(cmd_string)
-                
+
         if cmd in ["close", "exit"]:
             print("Good bye!")
             break
@@ -130,6 +137,8 @@ def main():
         elif cmd == "birthdays":
             print(show_upcoming_birthdays(book))
 
+        elif cmd == "contacts-birthdays-within":
+            print(show_contacts_birthdays_within(args, book))
         else:
             print("Invalid command.")
     save_data(book, book_path)
