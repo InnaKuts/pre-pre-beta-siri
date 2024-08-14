@@ -65,7 +65,7 @@ class AddressBook(UserDict):
             original_birthday = item.birthday.value
             birthday_this_year = original_birthday.replace(year=today.year)
             diff = today.date() - birthday_this_year
-            if (0 > diff.days and abs(diff.days) < days_till) or (0 < diff.days and (365 - diff.days) < days_till):
+            if (0 >= diff.days and abs(diff.days) < days_till) or (0 < diff.days and (365 - diff.days) < days_till):
                 contacts.append(item)
         if len(contacts) == 0:
             return f"No contacts found with birthday in {days_till} days."
