@@ -15,6 +15,9 @@ def add_contact(args, book: AddressBook):
         record = Record(name)
         book.add_record(record)
         message = "Contact added."
+    else:
+        message = "Contact with this name already exists. Please try again with a different name."
+        return message
     if phone:
         record.add_phone(phone)
     return message
