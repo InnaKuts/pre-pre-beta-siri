@@ -55,3 +55,20 @@ class AddressBook(UserDict):
             })
         
         return upcoming_birthdays
+
+    def get_birthdays_till_date(self, days_till: int):
+        contacts = []
+        today = datetime.today()
+        for key, item in self.data.items():
+            if item.birthday is None:
+                continue
+            original_birthday = item.birthday.value
+            birthday_this_year = original_birthday.replace(year=today.year)
+            diff = today.date() - birthday_this_year
+            if abs(diff.days) < days_till:
+                contacts.append(item)
+        if len(contacts) == 0:
+            return f"No contacts found with birthday in {days_till} days."
+        contact_strings = [str(record) for record in contacts]
+        result = "\n".join(contact_strings)
+        return result
