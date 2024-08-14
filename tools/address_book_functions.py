@@ -91,3 +91,11 @@ def show_upcoming_birthdays(args, book: AddressBook):
     birthday_strings = [f"{x['name']} - {x['congratulation_date']}" for x in items]
     result = "\n".join(birthday_strings)
     return result
+
+@command_check_decorator(
+        index_error_message="Error: Not enough arguments. Usage: contacts-birthdays-within [birthdays-days-within]"
+        )
+def show_contacts_birthdays_within(args, book: AddressBook):
+    days_till = args[0]
+    result = book.get_birthdays_till_date(int(days_till))
+    return result 
