@@ -11,8 +11,8 @@ from .update_note import update_note
 
 def make_command(subcommand: str = None):
     @command_check_decorator()
-    def command(args: [str], addressbook: AddressBook, **kwargs):
-        main_command(subcommand, args, kwargs.get('notebook'), addressbook)
+    def command(args: [str], addressbook: AddressBook, notebook: Notebook):
+        main_command(subcommand, args, notebook, addressbook)
         return ""
 
     return command

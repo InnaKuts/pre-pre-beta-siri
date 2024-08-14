@@ -44,7 +44,10 @@ def main():
 
             if command in commands:
                 functionToCall = COMMANDS[command]
-                result = functionToCall(params, book, notebook=notebook)
+                if command in NOTE_COMMANDS:
+                    result = functionToCall(params, book, notebook)
+                else:
+                    result = functionToCall(params, book)
 
                 if(not isinstance(result, bool) or (result == True)):
                     print(result)
