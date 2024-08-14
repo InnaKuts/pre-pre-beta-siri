@@ -1,4 +1,5 @@
 from notes import Notebook
+from tools.pretty_table import pretty_notes
 
 
 def find_notes(cmd: str, args: [str], notebook: Notebook):
@@ -11,8 +12,7 @@ def find_notes(cmd: str, args: [str], notebook: Notebook):
     notes = find_notes_internal(args, strict, notebook)
     if len(notes) == 0:
         print("No matching notes found!")
-    for note in notes:
-        print(note)
+    pretty_notes(notes)
     return True
 
 

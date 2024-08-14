@@ -2,6 +2,7 @@
 from model.addressBook import AddressBook
 from model.record import Record
 from tools import command_check_decorator
+from tools.pretty_table import pretty_records
 
 
 @command_check_decorator(
@@ -59,10 +60,8 @@ def show_phone(args, book:AddressBook):
 def show_all(args, book:AddressBook):
     if len(book) == 0:
         return "No contacts found."
-
-    contact_strings = [str(record) for _, record in book.data.items()]
-    result = "\n".join(contact_strings)
-    return result
+    pretty_records(book.data.values())
+    return ""
 
 
 @command_check_decorator(
