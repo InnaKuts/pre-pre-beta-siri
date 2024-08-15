@@ -10,11 +10,13 @@ from tools import command_check_decorator
 def add_contact(args, book: AddressBook):
     name, phone, *_ = args
     record = book.find(name)
-    message = "Contact updated."
     if record is None:
         record = Record(name)
         book.add_record(record)
         message = "Contact added."
+    else:
+        message = "Contact with this name already exists. Please try again with a different name."
+        return message
     if phone:
         record.add_phone(phone)
     return message
