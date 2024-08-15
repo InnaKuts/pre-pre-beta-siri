@@ -93,10 +93,6 @@ def show_upcoming_birthdays(args, book: AddressBook):
     return result
 
 
-
-
-
-@input_error
 def add_address(book: AddressBook, args: str) -> str:
     name = args[0]
     address = ' '.join(args[1:])
@@ -109,7 +105,6 @@ def add_address(book: AddressBook, args: str) -> str:
     return "Address added."
 
 
-@input_error
 def edit_address(book: AddressBook, args: str) -> str:
     name = args[0]
     address = ' '.join(args[1:])
@@ -122,14 +117,13 @@ def edit_address(book: AddressBook, args: str) -> str:
     return "Address updated."
 
 
-@input_error
+@command_check_decorator()
 def show_address(book: AddressBook, args: str) -> str:
     name = args[0]
     record = book.find(name)
     if not record or not record.address:
         return "No address found for this contact."
     return str(record.address)
-
 
 
 def find_by_address(self, address):
@@ -142,3 +136,11 @@ def find_by_address(self, address):
         return "\n".join([str(record) for record in matching_records])
     else:
         return "No contacts found with this address."
+
+@command_check_decorator(
+        index_error_message="Error: Not enough arguments. Usage: contacts-birthdays-within [birthdays-days-within]"
+        )
+def show_contacts_birthdays_within(args, book: AddressBook):
+    days_till = args[0]
+    result = book.get_birthdays_till_date(int(days_till))
+    return result 
