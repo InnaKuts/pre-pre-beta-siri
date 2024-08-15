@@ -26,7 +26,7 @@ def find_notes_internal(args: [str], strict: bool, notebook: Notebook):
         notes += notebook.find_notes_by_description(words, strict)
     else:
         notes = list(notebook.values())
-    notes.sort(key=lambda n: n.uuid)
+    notes.sort(key=lambda n: n.title.value)
     return notes
 
 

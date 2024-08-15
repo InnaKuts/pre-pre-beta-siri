@@ -8,7 +8,7 @@ def list_notes(cmd: str, notebook: Notebook):
     if len(notebook) == 0:
         print("Notebook is empty!")
     notes = list(notebook.values())
-    notes.sort(key=lambda n: n.uuid)
+    notes.sort(key=lambda n: n.title.value)
     if len(notes) == 0:
         print("No matching notes found!")
     for note in notes:
