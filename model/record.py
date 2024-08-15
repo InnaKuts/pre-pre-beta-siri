@@ -40,3 +40,29 @@ class Record:
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
  
+ class Record:
+    def __init__(self, name):
+        self.name = name
+        self.phones = []
+        self.email = None
+        self.birthday = None
+
+    def add_phone(self, phone):
+        self.phones.append(phone)
+
+    def edit_phone(self, old_phone, new_phone):
+        for index, p in enumerate(self.phones):
+            if p.value == old_phone:
+                self.phones[index].value = new_phone
+
+    def delete_phone(self, phone):
+        self.phones = [p for p in self.phones if p.value != phone]
+
+    def add_email(self, email):
+        self.email = email
+
+    def edit_email(self, new_email):
+        self.email = new_email
+
+    def delete_email(self):
+        self.email = None
