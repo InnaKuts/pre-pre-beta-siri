@@ -43,10 +43,12 @@ class Record:
         self.birthday = Birthday(birthday)
 
         
-    def add_address(self, address):
+    def add_address(self, address: str):
         self.address = Address(address)
 
-    
-    def edit_address(self, address):
-        self.address = Address(address)    
+    def edit_address(self, address: str):
+        self.address = Address(address)
+
+    def remove_address(self):
+        self.address = None   
  

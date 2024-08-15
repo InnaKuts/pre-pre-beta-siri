@@ -93,49 +93,63 @@ def show_upcoming_birthdays(args, book: AddressBook):
     return result
 
 
-def add_address(book: AddressBook, args: str) -> str:
+@command_check_decorator(value_error_message="Error: Not enough arguments. Usage: add-address [name] [address]")
+def add_address(args, book: AddressBook):
     name = args[0]
     address = ' '.join(args[1:])
-    if not name or not address:
-        raise ValueError("Error: Not enough arguments. Usage: add-address [name] [address]")
     record = book.find(name)
-    if not record:
-        return f"No contact found with name: {name}"
+    if record is None:
+        raise ValueError(f"No contact found with name: {name}")
     record.add_address(address)
     return "Address added."
 
 
-def edit_address(book: AddressBook, args: str) -> str:
+@command_check_decorator(value_error_message="Error: Not enough arguments. Usage: edit-address [name] [new address]")
+def edit_address(args, book: AddressBook):
     name = args[0]
     address = ' '.join(args[1:])
-    if not name or not address:
-        raise ValueError("Error: Not enough arguments. Usage: edit-address [name] [new address]")
     record = book.find(name)
-    if not record:
-        return f"No contact found with name: {name}"
+    if record is None:
+        raise ValueError(f"No contact found with name: {name}")
     record.edit_address(address)
     return "Address updated."
 
 
-@command_check_decorator()
-def show_address(book: AddressBook, args: str) -> str:
+@command_check_decorator(index_error_message="Error: Not enough arguments. Usage: show-address [name]")
+def show_address(args, book: AddressBook):
     name = args[0]
     record = book.find(name)
-    if not record or not record.address:
+    if record is None or not record.address:
         return "No address found for this contact."
     return str(record.address)
 
 
-def find_by_address(self, address):
-    matching_records = []
-    for record in self.data.values():
-        if record.address and str(record.address) == address:
-            matching_records.append(record)
-        
-    if matching_records:
-        return "\n".join([str(record) for record in matching_records])
-    else:
+@command_check_decorator(value_error_message="Error: Not enough arguments. Usage: search-address [search term]")
+def search_by_address(args, book: AddressBook):
+    search_term = ' '.join(args).lower()
+    matching_contacts = []
+
+    for record in book.data.values():
+        if record.address and search_term in str(record.address).lower():
+            matching_contacts.append(str(record))
+    
+    if not matching_contacts:
         return "No contacts found with this address."
+    
+    return "\n".join(matching_contacts)
+
+
+
+@command_check_decorator(
+    index_error_message="Error: Not enough arguments. Usage: remove-address [name]"
+)
+def remove_address(args, book: AddressBook):
+    name = args[0]
+    record = book.find(name)
+    if record is None or not record.address:
+        return f"No address found for contact '{name}'"
+    record.remove_address()
+    return "Address removed."
 
 @command_check_decorator(
         index_error_message="Error: Not enough arguments. Usage: contacts-birthdays-within [birthdays-days-within]"
