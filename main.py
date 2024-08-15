@@ -1,5 +1,4 @@
 from prompt_toolkit import PromptSession
-
 from model.database import Database
 from tools import parse_input, load_data, save_data
 from tools.address_book_functions import add_birthday, add_contact, change_contact, delete_contact, show_all, show_birthday, show_phone, show_upcoming_birthdays, show_contacts_birthdays_within
