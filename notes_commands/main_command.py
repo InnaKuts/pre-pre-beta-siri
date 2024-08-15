@@ -12,13 +12,13 @@ from .update_note import update_note
 def make_command(subcommand: str = None):
     @command_check_decorator()
     def command(args: [str], addressbook: AddressBook, notebook: Notebook):
-        main_command(subcommand, args, notebook, addressbook)
+        main_command(subcommand, args, addressbook, notebook)
         return ""
 
     return command
 
 
-def main_command(cmd: str, args: [str], notebook: Notebook, addressbook: AddressBook):
+def main_command(cmd: str, args: [str], addressbook: AddressBook, notebook: Notebook):
     if not cmd:
         cmd, args = parse_input(input("Enter notes command: "))
     if cmd == "help":

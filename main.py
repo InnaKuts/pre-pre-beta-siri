@@ -4,6 +4,7 @@ from tools import parse_input, load_data, save_data
 from tools.address_book_functions import add_birthday, add_contact, change_contact, delete_contact, show_all, show_birthday, show_phone, show_upcoming_birthdays, show_contacts_birthdays_within
 from tools.completer import CommandCompleter
 from tools.search import search_by_name
+from notes_commands import NOTE_COMMANDS
 
 COMMANDS = {
         "hello": lambda *args: "How can I help you?",
@@ -21,6 +22,7 @@ COMMANDS = {
         "contacts-birthdays-within": show_contacts_birthdays_within,
         "search": search_by_name
 }
+COMMANDS.update(NOTE_COMMANDS)
 
 def main():
     book_path = "addressbook.pkl"
@@ -38,7 +40,10 @@ def main():
 
             if command in commands:
                 functionToCall = COMMANDS[command]
-                result = functionToCall(params, db.address_book)
+                if command in NOTE_COMMANDS:
+                    result = functionToCall(params, db.address_book, db.notebook)
+                else:
+                    result = functionToCall(params, db.address_book)
 
                 if(not isinstance(result, bool) or (result == True)):
                     print(result)
