@@ -14,7 +14,7 @@ from tools import command_check_decorator, parse_input_validator
 # Email validation decorator
 def email_validator(func):
     def wrapper(*args, **kwargs):
-        email = args[1]  # Assuming email is always the second argument
+        email = args[0][1]  # Assuming email is always the second argument
         if "@" not in email or "." not in email:
             return "Error: Invalid email format."
         return func(*args, **kwargs)
