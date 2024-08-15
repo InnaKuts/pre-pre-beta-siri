@@ -1,8 +1,9 @@
 from prompt_toolkit import PromptSession
-from model.addressBook import AddressBook
+from model.database import Database
 from tools import parse_input, load_data, save_data
 from tools.address_book_functions import add_birthday, add_contact, change_contact, delete_contact, show_all, show_birthday, show_phone, show_upcoming_birthdays, show_contacts_birthdays_within
 from tools.completer import CommandCompleter
+from tools.search import search_by_name
 
 COMMANDS = {
         "hello": lambda *args: "How can I help you?",
@@ -17,13 +18,14 @@ COMMANDS = {
         "add-birthday": add_birthday,
         "show-birthday": show_birthday,
         "birthdays": show_upcoming_birthdays,
-        "contacts-birthdays-within": show_contacts_birthdays_within
+        "contacts-birthdays-within": show_contacts_birthdays_within,
+        "search": search_by_name
 }
 
 def main():
     book_path = "addressbook.pkl"
-    book = load_data(book_path, AddressBook())
-
+    db = load_data(book_path, Database.Default )
+   
     commands = COMMANDS.keys()
     session = PromptSession(completer = CommandCompleter(commands))
 
@@ -36,7 +38,7 @@ def main():
 
             if command in commands:
                 functionToCall = COMMANDS[command]
-                result = functionToCall(params, book)
+                result = functionToCall(params, db.address_book)
 
                 if(not isinstance(result, bool) or (result == True)):
                     print(result)
@@ -51,7 +53,7 @@ def main():
         except EOFError: #Ctrl+D
             break
 
-    save_data(book, book_path) 
+    save_data(book_path, db) 
 
 if __name__ == "__main__":
     main()
