@@ -28,3 +28,5 @@ class Notebook(UserDict):
     def find_notes_by_tags(self, tags: [str], match_all: bool = False):
         return [d for d in self.data.values() if d.tags.has(tags, match_all)]
 
+    def find_notes_by_description(self, words: [str], match_all: bool = False):
+        return [d for d in self.data.values() if d.description.has(words, match_all)]
