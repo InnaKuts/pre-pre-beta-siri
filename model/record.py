@@ -2,6 +2,7 @@ from .address import Address
 from .name import Name
 from .phone import Phone
 from .birthday import Birthday
+from datetime import datetime, timedelta
 
 class Record:
     def __init__(self, name):
@@ -38,11 +39,15 @@ class Record:
         for  ph in self.phones:
             if phone == ph.value:
                 return ph
-        raise Exception(f"No {ph} phone found for {self.name.value}")
+        raise Exception(f"No {phone} phone found for {self.name.value}")
     
     def add_birthday(self, birthday):
-        self.birthday = Birthday(birthday)
-
+        datetime_birthday = Birthday(birthday)
+        if datetime_birthday.value > datetime.today().date():
+            raise Exception("Birthday can't be in the future")
+        if datetime_birthday.value < datetime.today().date() - timedelta(days=365 * 150):
+            raise Exception("Birthday can't be more than 150 years ago")
+        self.birthday = datetime_birthday
         
     def add_address(self, address: str):
         self.address = Address(address)
@@ -52,4 +57,3 @@ class Record:
 
     def remove_address(self):
         self.address = None   
- 
