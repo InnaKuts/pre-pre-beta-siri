@@ -14,7 +14,7 @@ class Record:
         phones = '; '.join(ph.value for ph in self.phones)
         birthday_str = self.birthday.value.strftime('%d.%m.%Y') if self.birthday else 'N/A'
         address_str = f", address: {self.address}" if self.address else ""
-        return f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday_str}, address: {address_str}"
+        return f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday_str}{address_str}"
     
     def add_phone(self, phone:str):
         for ph in self.phones:
