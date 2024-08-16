@@ -11,10 +11,10 @@ def email_validator(func):
         return func(*args, **kwargs)
     return wrapper
 
-@email_validator
 @command_check_decorator(
-        value_error_message="Error: Not enough arguments. Usage: add-email [name] [email]"
+        index_error_message="Error: Not enough arguments. Usage: add-email [name] [email]"
         )
+@email_validator
 def add_email(args, book: AddressBook):
     name, email, *_ = args
     record = book.find(name)
@@ -34,10 +34,10 @@ def show_email(args, book: AddressBook):
         raise Exception(f"No '{name}' contact found")
     return record.email
 
-@email_validator
 @command_check_decorator(
-        value_error_message="Error: Not enough arguments. Usage: change-email [name] [new email]"
+        index_error_message="Error: Not enough arguments. Usage: change-email [name] [new email]"
         )
+@email_validator
 def change_email(args, book: AddressBook):
     name, new_email, *_ = args
     record = book.find(name)
