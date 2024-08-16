@@ -1,7 +1,7 @@
 from prompt_toolkit import PromptSession
 from model.database import Database
 from tools import parse_input, load_data, save_data
-from tools.address_book_functions import add_birthday, add_contact, change_contact, delete_contact, show_all, show_birthday, show_phone, show_upcoming_birthdays, show_contacts_birthdays_within
+from tools.address_book_functions import add_birthday, add_contact, change_contact, delete_contact, show_all, show_birthday, show_phone, show_upcoming_birthdays, show_contacts_birthdays_within, add_address, edit_address, show_address, search_by_address, remove_address
 from tools.completer import CommandCompleter
 from tools.search import search_by_name, search_by_email
 from notes_commands import NOTE_COMMANDS
@@ -20,8 +20,13 @@ COMMANDS = {
         "show-birthday": show_birthday,
         "birthdays": show_upcoming_birthdays,
         "contacts-birthdays-within": show_contacts_birthdays_within,
+        "add-address": add_address,
+        "edit-address": edit_address,
+        "show-address": show_address,
+        "search-address": search_by_address,
+        "remove-address": remove_address,
         "search-name": search_by_name,
-        "search-email": search_by_email
+        "search-email": search_by_email,
 }
 COMMANDS.update(NOTE_COMMANDS)
 
