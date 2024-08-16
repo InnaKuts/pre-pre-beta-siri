@@ -87,10 +87,10 @@ COMMANDS = {
         "add-birthday": add_birthday,
         "show-birthday": show_birthday,
         "birthdays": show_upcoming_birthdays,
-        "add-email": add_email,  # New command for adding email
-        "show-email": show_email,  # New command for showing email
-        "change-email": change_email,  # New command for changing email
-        "delete-email": delete_email,  # New command for deleting email
+        "add-email": add_email,  
+        "show-email": show_email, 
+        "change-email": change_email,  
+        "delete-email": delete_email, 
         "contacts-birthdays-within": show_contacts_birthdays_within,
         "add-address": add_address,
         "edit-address": edit_address,
