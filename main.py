@@ -12,6 +12,8 @@ from notes_commands import NOTE_COMMANDS
 # Import necessary modules and classes
 import re
 from tools import command_check_decorator, parse_input_validator
+from tools.test_data import add_test_data
+
 
 # Email validation decorator
 def email_validator(func):
@@ -97,6 +99,7 @@ COMMANDS = {
         "remove-address": remove_address,
         "search-name": search_by_name,
         "search-email": search_by_email,
+        "test-data": add_test_data,
 }
 COMMANDS.update(NOTE_COMMANDS)
 

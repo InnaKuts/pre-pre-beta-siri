@@ -1,4 +1,7 @@
+from model.addressBook import AddressBook
 from tools.command_check_decorator import command_check_decorator
+from tools.pretty_table import pretty_records
+
 
 @command_check_decorator(
         value_error_message = "Error: The search term should not be empty. Usage: search [name]",
@@ -10,11 +13,12 @@ def search_by_name(args, book):
 
     for contact in book.values():
         if search_name in contact.name.value.lower():
-            matching_contacts.append(str(contact))
+            matching_contacts.append(contact)
 
     if not matching_contacts:
         return "No contacts found."
-    return matching_contacts
+    pretty_records(matching_contacts)
+    return ""
 
 @command_check_decorator(
         value_error_message = "Error: The search term should not be empty. Usage: search [email]",
@@ -25,9 +29,11 @@ def search_by_email(args, book):
     matching_contacts = []
 
     for contact in book.values():
-        if contact.email and search_email in contact.email.value.lower():
-            matching_contacts.append(str(contact))
+        if contact.email and search_email in contact.email.lower():
+            matching_contacts.append(contact)
 
     if not matching_contacts:
         return "No contacts found."
-    return matching_contacts
+    pretty_records(matching_contacts)
+    return ""
+

@@ -10,6 +10,8 @@ def pretty_records(records: [Record]):
         ('Name', lambda r: r.name.value),
         ('Phones', lambda r: "\n".join([p.value for p in r.phones])),
         ('Birthday', lambda r: r.birthday.value.strftime('%d.%m.%Y') if r.birthday else "N/A"),
+        ('Email', lambda r: r.email if r.email else "N/A"),
+        ('Address', lambda r: r.address.value if r.address else "N/A"),
     ]
     for field in fields:
         table.add_column(field[0])

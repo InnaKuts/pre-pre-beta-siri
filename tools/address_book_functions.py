@@ -132,13 +132,14 @@ def search_by_address(args, book: AddressBook):
 
     for record in book.data.values():
         if record.address and search_term in str(record.address).lower():
-            matching_contacts.append(str(record))
-    
+            matching_contacts.append(record)
+
     if not matching_contacts:
         return "No contacts found with this address."
-    
-    return "\n".join(matching_contacts)
 
+    pretty_records(matching_contacts)
+
+    return ""
 
 
 @command_check_decorator(
