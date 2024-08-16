@@ -9,6 +9,7 @@ class Record:
         self.name = Name(name)
         self.phones = []
         self.birthday = None
+        self.email = None
         self.address = None
 
     def __str__(self):
@@ -40,7 +41,7 @@ class Record:
             if phone == ph.value:
                 return ph
         raise Exception(f"No {phone} phone found for {self.name.value}")
-    
+
     def add_birthday(self, birthday):
         datetime_birthday = Birthday(birthday)
         if datetime_birthday.value > datetime.today().date():
@@ -48,7 +49,19 @@ class Record:
         if datetime_birthday.value < datetime.today().date() - timedelta(days=365 * 150):
             raise Exception("Birthday can't be more than 150 years ago")
         self.birthday = datetime_birthday
-        
+
+    def delete_phone(self, phone):
+        self.phones = [p for p in self.phones if p.value != phone]
+
+    def add_email(self, email):
+        self.email = email
+
+    def edit_email(self, new_email):
+        self.email = new_email
+
+    def delete_email(self):
+        self.email = None
+
     def add_address(self, address: str):
         self.address = Address(address)
 
@@ -56,4 +69,4 @@ class Record:
         self.address = Address(address)
 
     def remove_address(self):
-        self.address = None   
+        self.address = None
