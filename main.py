@@ -6,11 +6,13 @@ from tools.address_book_functions import add_birthday, add_contact, change_conta
     add_address, edit_address, show_address, search_by_address, remove_address
 from tools.completer import CommandCompleter
 from tools.email_functions import add_email, change_email, delete_email, show_email
+from tools.help import help_command
 from tools.search import search_by_name, search_by_email
 from notes_commands import NOTE_COMMANDS, add_test_data
 
 
 COMMANDS = {
+        "help": help_command,
         "hello": lambda *args: "How can I help you?",
         "close": lambda *args: False,
         "exit": lambda *args: False,
