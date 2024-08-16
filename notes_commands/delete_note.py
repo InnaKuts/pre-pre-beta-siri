@@ -1,4 +1,5 @@
 from notes import Notebook
+from tools.pretty_table import pretty_notes
 from .find_notes import find_notes_internal
 
 
@@ -12,8 +13,7 @@ def delete_note(cmd: str, args: [str], notebook: Notebook):
     if len(notes) == 0:
         print("No matching notes found!")
         return True
-    for (index, note) in enumerate(notes):
-        print(f"[{index + 1}]: {note}")
+    pretty_notes(notes)
     index = input_index()
     if not index or index < 1 or index > len(notes):
         print("Invalid note index")

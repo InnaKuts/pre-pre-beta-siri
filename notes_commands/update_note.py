@@ -1,5 +1,6 @@
 from model.addressBook import AddressBook
 from notes import Notebook, Note
+from tools.pretty_table import pretty_notes
 from .add_note import get_title, input_description, input_tags, input_contact
 from .find_notes import find_notes_internal
 
@@ -14,8 +15,7 @@ def update_note(cmd: str, args: [str], notebook: Notebook, addressbook: AddressB
     if len(notes) == 0:
         print("No matching notes found!")
         return True
-    for (index, note) in enumerate(notes):
-        print(f"[{index + 1}]: {note}")
+    pretty_notes(notes)
     index = input_index()
     if not index or index < 1 or index > len(notes):
         print("Invalid note index")
