@@ -3,9 +3,11 @@ from model.addressBook import AddressBook
 from model.database import Database
 from tools import parse_input, load_data, save_data
 from tools.address_book_functions import add_birthday, add_contact, change_contact, delete_contact, show_all, \
-    show_birthday, show_phone, show_upcoming_birthdays, show_contacts_birthdays_within
+    show_birthday, show_phone, show_upcoming_birthdays, show_contacts_birthdays_within, \
+    add_address, edit_address, show_address, search_by_address, remove_address
 from tools.completer import CommandCompleter
-from tools.search import search_by_name
+from tools.search import search_by_name, search_by_email
+from notes_commands import NOTE_COMMANDS
 
 # Import necessary modules and classes
 import re
@@ -88,8 +90,15 @@ COMMANDS = {
         "change-email": change_email,  # New command for changing email
         "delete-email": delete_email,  # New command for deleting email
         "contacts-birthdays-within": show_contacts_birthdays_within,
-        "search": search_by_name,
+        "add-address": add_address,
+        "edit-address": edit_address,
+        "show-address": show_address,
+        "search-address": search_by_address,
+        "remove-address": remove_address,
+        "search-name": search_by_name,
+        "search-email": search_by_email,
 }
+COMMANDS.update(NOTE_COMMANDS)
 
 def main():
     book_path = "addressbook.pkl"
@@ -107,7 +116,10 @@ def main():
 
             if command in commands:
                 functionToCall = COMMANDS[command]
-                result = functionToCall(params, db.address_book)
+                if command in NOTE_COMMANDS:
+                    result = functionToCall(params, db.address_book, db.notebook)
+                else:
+                    result = functionToCall(params, db.address_book)
 
                 if(not isinstance(result, bool) or (result == True)):
                     print(result)
