@@ -112,7 +112,7 @@ def edit_address(args, book: AddressBook):
     address = ' '.join(args[1:])
     record = book.find(name)
     if record is None:
-        raise ValueError(f"No contact found with name: {name}")
+        raise Exception(f"No contact found with name: {name}")
     record.edit_address(address)
     return "Address updated."
 
