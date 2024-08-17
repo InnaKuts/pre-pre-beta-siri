@@ -1,5 +1,7 @@
 from prompt_toolkit import PromptSession
-from model.database import Database
+
+from tools.test_data import add_test_data
+from tools.database import Database
 from tools import parse_input, load_data, save_data
 from tools.address_book_functions import add_birthday, add_contact, change_contact, delete_contact, show_all, \
     show_birthday, show_phone, show_upcoming_birthdays, show_contacts_birthdays_within, \
@@ -8,8 +10,7 @@ from tools.completer import CommandCompleter
 from tools.email_functions import add_email, change_email, delete_email, show_email
 from tools.help import help_command
 from tools.search import search_by_name, search_by_email
-from notes_commands import NOTE_COMMANDS, add_test_data
-
+from notes_commands import NOTE_COMMANDS
 
 COMMANDS = {
         "help": help_command,
@@ -41,8 +42,7 @@ COMMANDS = {
 }
 COMMANDS.update(NOTE_COMMANDS)
 
-def main():
-    book_path = "addressbook.pkl"
+def main(book_path: str):
     db = load_data(book_path, Database.Default )
    
     commands = COMMANDS.keys()
@@ -76,6 +76,3 @@ def main():
             break
 
     save_data(book_path, db) 
-
-if __name__ == "__main__":
-    main()

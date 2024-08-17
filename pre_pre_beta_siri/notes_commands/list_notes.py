@@ -1,5 +1,4 @@
 from notes import Notebook
-from tools import command_check_decorator
 from tools.pretty_table import pretty_notes
 
 
