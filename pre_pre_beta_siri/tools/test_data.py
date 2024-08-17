@@ -1,9 +1,5 @@
-from model.address import Address
-from model.addressBook import AddressBook
-from model.birthday import Birthday
-from model.phone import Phone
-from model.record import Record
-from tools import command_check_decorator
+from ..model import Address, AddressBook, Birthday, Phone, Record
+from ..tools import command_check_decorator
 
 
 @command_check_decorator()

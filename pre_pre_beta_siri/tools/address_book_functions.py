@@ -1,8 +1,8 @@
 
-from model.addressBook import AddressBook
-from model.record import Record
-from tools import command_check_decorator
-from tools.pretty_table import pretty_records
+from ..model.addressBook import AddressBook
+from ..model.record import Record
+from ..tools import command_check_decorator
+from ..tools.pretty_table import pretty_records
 
 
 @command_check_decorator(

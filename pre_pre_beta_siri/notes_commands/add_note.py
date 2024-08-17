@@ -1,5 +1,5 @@
-from model.addressBook import AddressBook
-from notes import Notebook, Note
+from ..model.addressBook import AddressBook
+from ..notes import Notebook, Note
 
 
 def add_note(cmd: str, args: [str], notebook: Notebook, addressbook: AddressBook):

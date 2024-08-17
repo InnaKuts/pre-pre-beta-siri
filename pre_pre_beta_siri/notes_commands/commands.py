@@ -1,4 +1,4 @@
-from notes_commands.main_command import make_command
+from ..notes_commands.main_command import make_command
 
 COMMANDS = {
     "notes": make_command(),

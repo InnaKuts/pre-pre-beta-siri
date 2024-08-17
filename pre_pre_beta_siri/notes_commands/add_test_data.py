@@ -1,4 +1,4 @@
-from notes import Notebook, Note
+from ..notes import Notebook, Note
 
 
 def add_test_data(cmd: str, notebook: Notebook):

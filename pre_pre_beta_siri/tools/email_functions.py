@@ -1,6 +1,6 @@
 
-from model.addressBook import AddressBook
-from tools import command_check_decorator
+from ..model.addressBook import AddressBook
+from ..tools import command_check_decorator
 
 
 def email_validator(func):
