@@ -1,6 +1,6 @@
 from functools import reduce
 
-from model.field import Field
+from ..model.field import Field
 
 
 class Description(Field):

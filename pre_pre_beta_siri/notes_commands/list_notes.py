@@ -1,5 +1,5 @@
-from notes import Notebook
-from tools.pretty_table import pretty_notes
+from ..notes import Notebook
+from ..tools.pretty_table import pretty_notes
 
 
 def list_notes(cmd: str, notebook: Notebook):

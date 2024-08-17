@@ -1,7 +1,7 @@
 from rich.console import Console
 from rich.table import Table
-from model.record import Record
-from notes import Note
+from ..model.record import Record
+from ..notes import Note
 
 
 def pretty_records(records: [Record]):

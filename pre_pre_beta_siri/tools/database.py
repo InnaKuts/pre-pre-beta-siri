@@ -1,5 +1,5 @@
-from model.addressBook import AddressBook
-from notes.notebook import Notebook
+from ..model.addressBook import AddressBook
+from ..notes.notebook import Notebook
 
 class Database:
     Default = None

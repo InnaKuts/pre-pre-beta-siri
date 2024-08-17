@@ -1,6 +1,6 @@
-from model.addressBook import AddressBook
-from notes import Notebook, Note
-from tools.pretty_table import pretty_notes
+from ..model.addressBook import AddressBook
+from ..notes import Notebook, Note
+from ..tools.pretty_table import pretty_notes
 from .add_note import get_title, input_description, input_tags, input_contact
 from .find_notes import find_notes_internal
 

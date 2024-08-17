@@ -1,5 +1,5 @@
 import pickle
-from tools.database import Database
+from ..tools.database import Database
 
 def load_data(path, default) -> Database:
     try:

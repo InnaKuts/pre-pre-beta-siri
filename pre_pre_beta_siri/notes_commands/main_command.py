@@ -1,8 +1,8 @@
-from model.addressBook import AddressBook
-from notes import Notebook
+from ..model.addressBook import AddressBook
+from ..notes import Notebook
 from .add_note import add_note
 from .add_test_data import add_test_data
-from tools import command_check_decorator, parse_input
+from ..tools import command_check_decorator, parse_input
 from .delete_note import delete_note
 from .list_notes import list_notes
 from .find_notes import find_notes
