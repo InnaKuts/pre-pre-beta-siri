@@ -1,3 +1,6 @@
+"""
+Функції форматування даних у вигляді таблиць.
+"""
 from rich.console import Console
 from rich.table import Table
 from ..model.record import Record

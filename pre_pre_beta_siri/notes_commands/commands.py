@@ -1,3 +1,6 @@
+"""
+Визначення команд роботи з нотатками.
+"""
 from ..notes_commands.main_command import make_command
 
 COMMANDS = {

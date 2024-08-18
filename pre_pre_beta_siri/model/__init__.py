@@ -1,3 +1,6 @@
+"""
+Оголошення пакету
+"""
 from .address import Address
 from .addressBook import AddressBook
 from .birthday import Birthday

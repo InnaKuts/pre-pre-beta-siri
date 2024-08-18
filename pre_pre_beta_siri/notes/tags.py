@@ -1,3 +1,6 @@
+"""
+Модель для роботи з тегами нотаток.
+"""
 from ..model.field import Field
 
 

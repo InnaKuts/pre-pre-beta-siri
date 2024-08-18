@@ -1,3 +1,6 @@
+"""
+Модель для роботи з номерами телефонів.
+"""
 import re
 from .field import Field
 

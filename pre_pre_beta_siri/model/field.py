@@ -1,3 +1,6 @@
+"""
+Модель, базовий клас для сутностей.
+"""
 class Field:
     def __init__(self, value):
         self.value = value

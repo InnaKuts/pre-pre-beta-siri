@@ -1,4 +1,6 @@
-
+"""
+Набір доступних функцій для роботи з контактами.
+"""
 from ..model.addressBook import AddressBook
 from ..model.record import Record
 from ..tools import command_check_decorator

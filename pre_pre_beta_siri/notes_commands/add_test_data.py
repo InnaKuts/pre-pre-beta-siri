@@ -1,3 +1,6 @@
+"""
+Команда для додавання тестових даних.
+"""
 from ..notes import Notebook, Note
 
 

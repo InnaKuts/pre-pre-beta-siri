@@ -1,3 +1,6 @@
+"""
+Команда для додавання нотаток.
+"""
 from ..model.addressBook import AddressBook
 from ..notes import Notebook, Note
 

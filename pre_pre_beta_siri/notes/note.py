@@ -1,3 +1,6 @@
+"""
+Модель для роботи з окремими нотатками.
+"""
 import time
 from .contact import Contact
 from .description import Description

@@ -1,3 +1,6 @@
+"""
+Контейнер зберігання Контактів і Нотаток .
+"""
 from ..model.addressBook import AddressBook
 from ..notes.notebook import Notebook
 

@@ -1,3 +1,6 @@
+"""
+Модель для роботи з датою народження.
+"""
 from datetime import datetime
 from .field import Field
 

@@ -1,3 +1,6 @@
+"""
+Точка входу до вибору команди користувачем.
+"""
 from ..model.addressBook import AddressBook
 from ..notes import Notebook
 from .add_note import add_note

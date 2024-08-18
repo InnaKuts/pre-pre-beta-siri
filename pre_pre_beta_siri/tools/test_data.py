@@ -1,3 +1,6 @@
+"""
+Скрипт генерації тестових даних.
+"""
 from ..model import Address, AddressBook, Birthday, Phone, Record
 from ..tools import command_check_decorator
 
