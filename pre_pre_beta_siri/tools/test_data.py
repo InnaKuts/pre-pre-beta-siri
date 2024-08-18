@@ -17,11 +17,11 @@ def add_test_data(args, book: AddressBook):
 
 def generate_test_data():
     test_records = [
-        Record(name="John Doe"),  # Shared phone, unique email
-        Record(name="Jane Smith"),  # Shared phone
-        Record(name="Emily Davis"),  # Shared address
-        Record(name="Michael Johnson"),  # Shared address, unique phone
-        Record(name="Sam Brown"),  # Unique email
+        Record(name="John"),  # Shared phone, unique email
+        Record(name="Jane"),  # Shared phone
+        Record(name="Emily"),  # Shared address
+        Record(name="Michael"),  # Shared address, unique phone
+        Record(name="Sam"),  # Unique email
     ]
 
     # Adding shared and unique fields
