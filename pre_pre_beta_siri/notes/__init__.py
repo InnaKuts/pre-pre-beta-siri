@@ -1,3 +1,6 @@
+"""
+Оголошення пакету
+"""
 from .notebook import Notebook
 from .note import Note
 from .title import Title

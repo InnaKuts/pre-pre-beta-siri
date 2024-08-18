@@ -1,3 +1,6 @@
+"""
+Декоратор для валідації команд
+"""
 def command_check_decorator(
         index_error_message=None,
         value_error_message=None,

@@ -1,3 +1,6 @@
+"""
+Команда для видалення нотатки.
+"""
 from ..notes import Notebook
 from ..tools.pretty_table import pretty_notes
 from .find_notes import find_notes_internal

@@ -1,3 +1,6 @@
+"""
+Модель для роботи з блокнотом, який містить нотатки.
+"""
 from collections import UserDict
 
 from .note import Note

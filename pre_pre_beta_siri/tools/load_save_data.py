@@ -1,3 +1,6 @@
+"""
+Функції для завантаження та збереження даних
+"""
 import pickle
 from ..tools.database import Database
 

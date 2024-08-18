@@ -1,3 +1,6 @@
+"""
+Модель для збереження та обробки адреси.
+"""
 import re
 from .field import Field
 
@@ -14,8 +17,3 @@ class Address(Field):
         pattern = r'^[A-Za-z\s]+ \d+, \d{5} [A-Za-z\s]+, [A-Za-z\s]+$' 
         return bool(re.match(pattern, value))
     
-
-
-
-
-

@@ -1,4 +1,6 @@
-
+"""
+Набір функцій для роботи з електронною поштою.
+"""
 from ..model.addressBook import AddressBook
 from ..tools import command_check_decorator
 

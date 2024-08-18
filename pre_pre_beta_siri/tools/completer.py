@@ -1,3 +1,6 @@
+"""
+Скрипт для автодоповнення команд в консолі.
+"""
 from prompt_toolkit.completion import Completer, Completion
 
 class CommandCompleter(Completer):

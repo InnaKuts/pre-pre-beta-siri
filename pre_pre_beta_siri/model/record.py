@@ -1,3 +1,6 @@
+"""
+Модель для збереження і обробки записів контактів.
+"""
 from .address import Address
 from .name import Name
 from .phone import Phone

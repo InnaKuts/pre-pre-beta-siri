@@ -1,4 +1,6 @@
-
+"""
+ Файл з функціями, що надають інформацю стосовно формату команд.
+"""
 def help_command(*args, **kwargs):
     return f"""
     `close` - Closes the application

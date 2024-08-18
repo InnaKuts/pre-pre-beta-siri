@@ -1,3 +1,6 @@
+"""
+Деталі установки застосунку у якості пакету. Залежності
+"""
 from setuptools import setup, find_packages
 setup(
     name='pre_pre_beta_siri',

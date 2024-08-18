@@ -1,3 +1,6 @@
+"""
+Скрипт для парсингу введених команд.
+"""
 from .parse_input_validator import parse_input_validator
 
 

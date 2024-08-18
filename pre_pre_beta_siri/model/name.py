@@ -1,3 +1,6 @@
+"""
+Модель для збереження імені.
+"""
 from .field import Field
 
 class Name(Field):

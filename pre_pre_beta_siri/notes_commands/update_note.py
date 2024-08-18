@@ -1,3 +1,6 @@
+"""
+Команда для оновлення нотаток.
+"""
 from ..model.addressBook import AddressBook
 from ..notes import Notebook, Note
 from ..tools.pretty_table import pretty_notes

@@ -1,3 +1,6 @@
+"""
+Модель для роботи з заголовками нотаток.
+"""
 from functools import reduce
 
 from ..model.field import Field

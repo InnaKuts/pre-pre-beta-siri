@@ -1,3 +1,6 @@
+"""
+Модель зберігання/пошуку контактів.
+"""
 from collections import UserDict
 from .record import Record
 from datetime import datetime

@@ -1,3 +1,6 @@
+"""
+Оголошення пакету
+"""
 from .command_check_decorator import command_check_decorator
 from .parse_input_validator import parse_input_validator
 from .parse_input import parse_input

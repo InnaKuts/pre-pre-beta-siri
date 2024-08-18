@@ -1,3 +1,6 @@
+"""
+Команда для пошуку нотаток.
+"""
 from ..notes import Notebook
 from ..tools.pretty_table import pretty_notes
 

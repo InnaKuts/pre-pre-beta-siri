@@ -1,3 +1,6 @@
+"""
+Модель для збереження опису.
+"""
 from functools import reduce
 
 from ..model.field import Field

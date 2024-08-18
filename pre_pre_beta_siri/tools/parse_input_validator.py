@@ -1,3 +1,6 @@
+"""
+Валідатор введених команд.
+"""
 def parse_input_validator(func):
     def inner(*args, **kwargs):
         if len(args[0]) == 0:
