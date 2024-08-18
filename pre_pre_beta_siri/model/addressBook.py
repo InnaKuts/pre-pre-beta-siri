@@ -3,7 +3,7 @@
 """
 from collections import UserDict
 from .record import Record
-from datetime import datetime
+from datetime import datetime, timedelta
 
 class AddressBook(UserDict):
     def add_record(self, record:Record):
@@ -32,7 +32,7 @@ class AddressBook(UserDict):
             
             birthday_this_year = original_birthday.replace(year=now.year)
             
-            is_birthday_yesterday_but_sunday_today = (now.weekday() == 6) and (now == birthday_this_year + datetime.timedelta(days=1))
+            is_birthday_yesterday_but_sunday_today = (now.weekday() == 6) and (now == birthday_this_year + timedelta(days=1))
 
             if birthday_this_year < now:
                 birthday_this_year = birthday_this_year.replace(year=now.year + 1)
@@ -45,10 +45,10 @@ class AddressBook(UserDict):
 
                 if birthday_this_year.weekday() in (5,6): #saturday, sunday
                     days_till_monday = 7 - birthday_this_year.weekday()
-                    congratulation_date = birthday_this_year + datetime.timedelta(days=days_till_monday)
+                    congratulation_date = birthday_this_year + timedelta(days=days_till_monday)
                
             elif is_birthday_yesterday_but_sunday_today:
-                congratulation_date = now + datetime.timedelta(days=1)
+                congratulation_date = now + timedelta(days=1)
             else:
                 continue
            
